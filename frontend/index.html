@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Библиотека</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>📕Библиотечная система</h1>
+  <nav>
+    <button class="nav-btn active" data-tab="physical">Физические книги</button>
+    <button class="nav-btn" data-tab="digital">Цифровые ресурсы</button>
+    <button class="nav-btn" data-tab="admin">Админка</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Физические книги -->
+  <section id="tab-physical" class="tab active">
+    <h2>Физические книги</h2>
+    <div class="search">
+      <input id="searchInput" type="text" class="input" placeholder="Автор или инвентарный номер">
+      <button id="searchBtn" class="btn btn-search">Найти</button>
+      <button id="resetBtn" class="btn btn-reset">Сброс</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Инв. №</th>
+          <th>Название</th>
+          <th>Автор</th>
+          <th>Статус</th>
+          <th>Действие</th>
+        </tr>
+      </thead>
+      <tbody id="physicalTable"></tbody>
+    </table>
+  </section>
+
+  <!-- Цифровые ресурсы -->
+  <section id="tab-digital" class="tab">
+    <h2>Цифровые ресурсы</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Название</th>
+          <th>Автор</th>
+          <th>Формат</th>
+          <th>Размер (КБ)</th>
+          <th>Скачиваний</th>
+          <th>Действие</th>
+        </tr>
+      </thead>
+      <tbody id="digitalTable"></tbody>
+    </table>
+  </section>
+
+  <!-- Админка -->
+  <section id="tab-admin" class="tab">
+    <h2>Админка</h2>
+    <iframe id="adminIframe" frameborder="0"></iframe>
+  </section>
+
+</main>
+
+<script src="app.js" defer></script>
+</body>
+</html>

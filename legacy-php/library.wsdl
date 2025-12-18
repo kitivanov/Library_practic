@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+    name="LibraryService"
+    targetNamespace="http://example.com/library"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://example.com/library"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <!-- ===== Types ===== -->
+    <types>
+        <xsd:schema targetNamespace="http://example.com/library">
+
+            <!-- getBookByInventory -->
+            <xsd:element name="getBookRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="inventory_number" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getBookResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="title" type="xsd:string"/>
+                        <xsd:element name="author" type="xsd:string"/>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- searchBooksByAuthor -->
+            <xsd:element name="searchBooksRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="author" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="searchBooksResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="book" maxOccurs="unbounded" minOccurs="0">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="inventory_number" type="xsd:string"/>
+                                    <xsd:element name="title" type="xsd:string"/>
+                                    <xsd:element name="author" type="xsd:string"/>
+                                    <xsd:element name="status" type="xsd:string"/>
+                                    <xsd:element name="year" type="xsd:string"/>
+                                    <xsd:element name="location" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- registerLoan -->
+            <xsd:element name="registerLoanRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="inventory_number" type="xsd:string"/>
+                        <xsd:element name="reader_card" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="registerLoanResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="success" type="xsd:boolean"/>
+                        <xsd:element name="message" type="xsd:string"/>
+                        <xsd:element name="loan_id" type="xsd:int" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- returnBook -->
+            <xsd:element name="returnBookRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="inventory_number" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="returnBookResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="success" type="xsd:boolean"/>
+                        <xsd:element name="message" type="xsd:string"/>
+                        <xsd:element name="loan_id" type="xsd:int" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </types>
+
+    <!-- ===== Messages ===== -->
+    <message name="getBookInput"><part name="parameters" element="tns:getBookRequest"/></message>
+    <message name="getBookOutput"><part name="parameters" element="tns:getBookResponse"/></message>
+
+    <message name="searchBooksInput"><part name="parameters" element="tns:searchBooksRequest"/></message>
+    <message name="searchBooksOutput"><part name="parameters" element="tns:searchBooksResponse"/></message>
+
+    <message name="registerLoanInput"><part name="parameters" element="tns:registerLoanRequest"/></message>
+    <message name="registerLoanOutput"><part name="parameters" element="tns:registerLoanResponse"/></message>
+
+    <message name="returnBookInput"><part name="parameters" element="tns:returnBookRequest"/></message>
+    <message name="returnBookOutput"><part name="parameters" element="tns:returnBookResponse"/></message>
+
+    <!-- ===== PortType ===== -->
+    <portType name="LibraryPortType">
+        <operation name="getBookByInventory">
+            <input message="tns:getBookInput"/>
+            <output message="tns:getBookOutput"/>
+        </operation>
+        <operation name="searchBooksByAuthor">
+            <input message="tns:searchBooksInput"/>
+            <output message="tns:searchBooksOutput"/>
+        </operation>
+        <operation name="registerLoan">
+            <input message="tns:registerLoanInput"/>
+            <output message="tns:registerLoanOutput"/>
+        </operation>
+        <operation name="returnBook">
+            <input message="tns:returnBookInput"/>
+            <output message="tns:returnBookOutput"/>
+        </operation>
+    </portType>
+
+    <!-- ===== Binding ===== -->
+    <binding name="LibraryBinding" type="tns:LibraryPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getBookByInventory">
+            <soap:operation soapAction="getBookByInventory"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="searchBooksByAuthor">
+            <soap:operation soapAction="searchBooksByAuthor"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="registerLoan">
+            <soap:operation soapAction="registerLoan"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="returnBook">
+            <soap:operation soapAction="returnBook"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+    </binding>
+
+    <!-- ===== Service ===== -->
+    <service name="LibraryService">
+        <port name="LibraryPort" binding="tns:LibraryBinding">
+            <soap:address location="http://localhost:8000/soap-server.php"/>
+        </port>
+    </service>
+
+</definitions>

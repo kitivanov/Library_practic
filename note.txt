@@ -1,0 +1,22 @@
+node modern/init_scripts/initData.js
+
+
+modern: 
+
+php ./legacy-php/scripts/init_db.php
+
+npm init -y
+npm install express mongoose axios body-parser cors xml2js soap mocha chai
+node modern/init_scripts/initData.js
+node init_scripts/initData.js
+
+
+
+php -S localhost:8000 -t ./legacy-php
+php -S localhost:8001 -t ./legacy-php
+node modern/index.js
+
+
+
+php ./legacy-php/scripts/init_db.php
+php ./legacy-php/scripts/testssearchBooksByAuthor.php

@@ -1,0 +1,23 @@
+{
+    "php": {
+        "host": "localhost",
+        "port": 8000,
+        "db_name": "library.db"
+    },
+
+    "admin": {
+        "host": "localhost",
+        "port": 8001
+    },
+
+    "node": {
+        "host": "localhost",
+        "port": 3000
+    },
+
+    "mongo": {
+        "host": "127.0.0.1",
+        "port": 27017,
+        "db": "modern"
+    }
+}
