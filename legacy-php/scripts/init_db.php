@@ -1,5 +1,5 @@
 <?php
-$config = require __DIR__ . '/config.php';
+$config = require __DIR__ . '/../config.php';
 
 $sqlitePath = __DIR__ . '/../' . $config['php']['db_name'];
 

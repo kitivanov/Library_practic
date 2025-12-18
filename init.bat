@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-echo 1. Инициализация БД PHP
+echo 1. Initialization DB PHP
 php ./legacy-php/scripts/init_db.php
 if %ERRORLEVEL% neq 0 (
     echo Ошибка при выполнении PHP скрипта!
@@ -9,32 +9,19 @@ if %ERRORLEVEL% neq 0 (
     exit /b %ERRORLEVEL%
 )
 
-echo 2. Инициализация npm проекта
+echo 3. Initialization requirements JS
 cd modern
-npm init -y
-if %ERRORLEVEL% neq 0 (
-    echo Ошибка при npm init!
-    pause
-    exit /b %ERRORLEVEL%
-)
-
-echo 3. Установка зависимостей JS
-npm install
-if %ERRORLEVEL% neq 0 (
-    echo Ошибка при установке npm пакетов!
-    pause
-    exit /b %ERRORLEVEL%
-)
+cmd /c "npm install || exit /b 0"
 
 cd ..
 
-echo 4. Инициализация MongoDB: modern/init_scripts/initData.js
+echo 4. Initialization MongoDB: modern/init_scripts/initData.js
 node modern/init_scripts/initData.js
 if %ERRORLEVEL% neq 0 (
-    echo Ошибка при выполнении Node скрипта!
+    echo Error Node script!
     pause
     exit /b %ERRORLEVEL%
 )
 
-echo Все команды выполнены успешно!
+echo Initialization complete.
 pause
